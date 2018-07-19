@@ -46,24 +46,24 @@ namespace IndeksatorTraining.UI
                     previous = current;
                     current = current.Next;
                 }
-                    if (previous != null && current.Next == null)
+
+                if (previous != null && current.Next == null)
+                {
+                    tail = previous;
+                }
+                else
+                {
+                    head = head.Next;
+
+                    if (head == null)
                     {
-                        tail = previous;
+                        tail = null;
                     }
-                    else
-                    {
-                        head = head.Next;
+                }
 
-                        if (head == null)
-                        {
-                            tail = null;
-                        }
-                    }
+                count--;
 
-                    count--;
-
-                    return current;
-
+                return current;
             }
 
             return null;
@@ -73,7 +73,7 @@ namespace IndeksatorTraining.UI
         {
             var element = new Element<T>(data);
 
-            if(head == null)
+            if (head == null)
             {
                 head = element;
             }
@@ -121,7 +121,7 @@ namespace IndeksatorTraining.UI
                 "Oleg"
             };
 
-            foreach(var element in elList)
+            foreach (var element in elList)
             {
                 Console.WriteLine(element);
             }
