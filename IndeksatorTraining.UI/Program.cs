@@ -69,6 +69,46 @@ namespace IndeksatorTraining.UI
             return null;
         }
 
+        public bool Remove(T data)
+        {
+            Element<T> current = head;
+            Element<T> previous = null;
+
+            while (current != null)
+            {
+                if (current.Data.Equals(data))
+                {
+                    if(previous != null)
+                    {
+                        previous.Next = current.Next;
+
+                        if(current.Next == null)
+                        {
+                            tail = previous;
+                        }
+                    }
+                    else
+                    {
+                        head = head.Next;
+
+                        if(head == null)
+                        {
+                            tail = null;
+                        }
+                    }
+
+                    count--;
+
+                    return true;
+                }
+
+                previous = current;
+                current = current.Next;
+            }
+
+            return false;
+        }
+
         public void Add(T data)
         {
             var element = new Element<T>(data);
@@ -118,19 +158,32 @@ namespace IndeksatorTraining.UI
             var elList = new ElementList<string>
             {
                 "Alexandr",
-                "Oleg"
+                "Oleg",
+                "Genadi",
+                "Ania"
             };
 
-            foreach (var element in elList)
+            Display(elList);
+
+            //var el = elList["Alexandr"];
+
+            //Console.WriteLine(el.Data);
+
+            elList.Remove("Genadi");
+
+            Console.WriteLine("After delete:");
+
+            Display(elList);
+
+            Console.ReadKey();
+        }
+
+        public static void Display<T>(ElementList<T> elements) 
+        {
+            foreach(var element in elements)
             {
                 Console.WriteLine(element);
             }
-
-            var el = elList["Alexandr"];
-
-            Console.WriteLine(el.Data);
-
-            Console.ReadKey();
         }
     }
 }
