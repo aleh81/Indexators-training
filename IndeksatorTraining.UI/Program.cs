@@ -178,7 +178,7 @@ namespace IndeksatorTraining.UI
             Console.ReadKey();
         }
 
-        public static void Display<T>(ElementList<T> elements) 
+        public static void Display<T>(ElementList<T> elements) where T : class
         {
             foreach(var element in elements)
             {
