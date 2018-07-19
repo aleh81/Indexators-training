@@ -41,14 +41,14 @@ namespace IndeksatorTraining.UI
 
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if (!current.Data.Equals(data))
                 {
-                    if (previous != null)
+                    previous = current;
+                    current = current.Next;
+                }
+                    if (previous != null && current.Next == null)
                     {
-                        if (current.Next == null)
-                        {
-                            tail = previous;
-                        }
+                        tail = previous;
                     }
                     else
                     {
@@ -63,10 +63,7 @@ namespace IndeksatorTraining.UI
                     count--;
 
                     return current;
-                }
 
-                previous = current;
-                current = current.Next;
             }
 
             return null;
