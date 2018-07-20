@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+using System;
 
 
 namespace IndeksatorTraining.UI
@@ -117,6 +118,11 @@ namespace IndeksatorTraining.UI
         {
             var element = new Element<TKey, TValue>(key, data);
 
+            if (ContainsKey(key))
+            {
+                throw new ArgumentException("ERROR: The key is contains in list");
+            }
+
             if (head == null)
             {
                 head = element;
@@ -138,13 +144,13 @@ namespace IndeksatorTraining.UI
             count = 0;
         }
 
-        public bool Contains(TValue data)
+        public bool ContainsKey(TKey key)
         {
-            Element<TKey, TValue> current = head;
+            var current = head;
 
             while (current != null)
             {
-                if (current.Value.Equals(data))
+                if (current.Key.GetHashCode() == key.GetHashCode())
                 {
                     return true;
                 }
@@ -154,6 +160,7 @@ namespace IndeksatorTraining.UI
 
             return false;
         }
+
 
         IEnumerator IEnumerable.GetEnumerator()
         {

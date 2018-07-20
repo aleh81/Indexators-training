@@ -7,6 +7,15 @@ namespace IndeksatorTraining.UI
     {
         static void Main(string[] args)
         {
+            //TestString_String();
+
+            TestInt_String();
+
+            Console.ReadKey();
+        }
+
+        static void TestString_String()
+        {
             var elList = new ElementList<string, string>
             {
                 {"alexkey", "Alexandr"},
@@ -33,6 +42,30 @@ namespace IndeksatorTraining.UI
             Console.WriteLine("After Insert element:");
 
             Display(elList);
+        }
+
+        static void TestInt_String()
+        {
+            var elIntList = new ElementList<int, string>
+            {
+                {1, "Alexandr"},
+                {2, "Oleg"},
+                {3, "Genadiy"},
+                {4, "Sergey"}
+            };
+
+            Console.WriteLine("List with int keys:");
+
+            DisplayAlternative(elIntList);
+
+            try
+            {
+                elIntList.Add(1, "Fedia");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             Console.ReadKey();
         }
@@ -51,9 +84,16 @@ namespace IndeksatorTraining.UI
             }
         }
 
-        static void DisplayAlternative<Tkey, TValue>(ElementList<Tkey, TValue> elements)
+        static void DisplayAlternative(ElementList<int, string> elements)
         {
             Hr();
+
+            var div = new Dictionary<string, string>();
+
+            for (var i = 0; i <= elements.Count; i++)
+            {
+                Console.WriteLine(elements[i]);
+            }
         }
     }
 }
