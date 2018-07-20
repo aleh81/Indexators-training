@@ -20,6 +20,16 @@ namespace IndeksatorTraining.UI
             {
                 return GetElementByData(index);
             }
+
+            set
+            {
+                InsertElement(value);
+            }
+        }
+
+        private void InsertElement(Element<T> element)
+        {
+
         }
 
         private Element<T> GetElementByData(T data)
