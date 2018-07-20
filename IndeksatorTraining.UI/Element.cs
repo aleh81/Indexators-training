@@ -1,14 +1,23 @@
 ﻿namespace IndeksatorTraining.UI
 {
-    public class Element<T>
+    public class Element<TKey, TValue>
     {
-        public T Data { get; set; }
+        public TKey Key { get; }
 
-        public Element<T> Next { get; set; }
+        public TValue Value { get; }
 
-        public Element(T data)
+        public Element<TKey, TValue> Next { get; set; }
+
+        public Element(TKey key, TValue value)
         {
-            Data = data;
+            Key = key;
+
+            Value = value;
+        }
+
+        public override string ToString()
+        {
+            return $"Key: {Key}, Value: {Value}";
         }
     }
 }

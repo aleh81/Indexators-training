@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IndeksatorTraining.UI
 {
@@ -6,42 +7,47 @@ namespace IndeksatorTraining.UI
     {
         static void Main(string[] args)
         {
-            var elList = new ElementList<string>
+            var elList = new ElementList<string, string>
             {
-                "Alexandr",
-                "Oleg",
-                "Genadi",
-                "Ania"
+                {"alexkey", "Alexandr"},
+                { "olegKey", "Oleg"},
+                { "genadiKey", "Genadiy"},
+                { "sergeyKey", "Sergey"}
             };
 
-            Display(elList);
+            Console.WriteLine(elList["alexkey"]);
 
-            //var el = elList["Alexandr"];
+            //Console.WriteLine(list["Frodo"]);
 
-            //Console.WriteLine(el.Data);
+            //Console.WriteLine(new string('-', 20));
+            //Display(elList);
 
-            elList.Remove("Genadi");
+            ////var el = elList["Alexandr"];
 
-            Console.WriteLine("After delete:");
+            ////Console.WriteLine(el.Data);
 
-            Display(elList);
+            //elList.Remove("Genadi");
 
-            Console.WriteLine("Insert Element:");
+            //Console.WriteLine("After delete:");
 
-            var element = new Element<string>("Пятница");
+            //Display(elList);
 
-            elList["Ania"] = element;
+            //Console.WriteLine("Insert Element:");
 
-            Display(elList);
+            //var element = new Element<string>("Пятница");
+
+            //elList["Ania"] = element;
+
+            //Display(elList);
 
             Console.ReadKey();
         }
 
-        public static void Display<T>(ElementList<T> elements) where T : class
+        public static void Display<TKey, TValue>(ElementList<TKey, TValue> elements)
         {
             Console.WriteLine($"Count Elements: {elements.Count}");
 
-            foreach(var element in elements)
+            foreach (var element in elements)
             {
                 Console.WriteLine(element);
             }

@@ -4,17 +4,17 @@ using System.Collections;
 
 namespace IndeksatorTraining.UI
 {
-    class ElementList<T> : IEnumerable<T>
+    class ElementList<TKey, TValue> : IEnumerable<TKey>
     {
-        Element<T> head;
+        Element<TKey, TValue> head;
 
-        Element<T> tail;
+        Element<TKey, TValue> tail;
 
         private int count;
 
         public int Count => count;
 
-        public Element<T> this[T index]
+        public Element<TKey, TValue> this[TKey index]
         {
             get
             {
@@ -27,15 +27,15 @@ namespace IndeksatorTraining.UI
             }
         }
 
-        private void InsertElement(Element<T> element, T data)
+        private void InsertElement(Element<TKey, TValue> element, TKey data)
         {
-            Element<T> current = head;
-            Element<T> previous = null;
-            Element<T> tmp = null;
+            Element<TKey, TValue> current = head;
+            Element<TKey, TValue> previous = null;
+            Element<TKey, TValue> tmp = null;
 
             while(current != null)
             {
-                if (current.Data.Equals(data))
+                if (current.Value.Equals(data))
                 {
                     if(current.Next != null)
                     {
@@ -58,49 +58,48 @@ namespace IndeksatorTraining.UI
             }
         }
 
-        private Element<T> GetElementByData(T data)
+        private Element<TKey, TValue> GetElementByData(TKey key)
         {
-            Element<T> current = head;
-            Element<T> previous = null;
+            Element<TKey, TValue> current = head;
+            Element<TKey, TValue> previous = null;
 
             while (current != null)
             {
-                if (!current.Data.Equals(data))
+                if (current.Key.Equals(key))
                 {
-                    previous = current;
-                    current = current.Next;
-                }
 
-                if (previous != null && current.Next == null)
-                {
-                    tail = previous;
-                }
-                else
-                {
-                    head = head.Next;
-
-                    if (head == null)
+                    if (previous != null && current.Next == null)
                     {
-                        tail = null;
+                        tail = previous;
                     }
+                    else
+                    {
+                        head = head.Next;
+
+                        if (head == null)
+                        {
+                            tail = null;
+                        }
+                    }
+
+                    return current;
                 }
 
-                count--;
-
-                return current;
+                previous = current;
+                current = current.Next;
             }
 
             return null;
         }
 
-        public bool Remove(T data)
+        public bool Remove(TKey key)
         {
-            Element<T> current = head;
-            Element<T> previous = null;
+            Element<TKey, TValue> current = head;
+            Element<TKey, TValue> previous = null;
 
             while (current != null)
             {
-                if (!current.Data.Equals(data))
+                if (!current.Value.Equals(key))
                 {
                     previous = current;
                     current = current.Next;
@@ -133,9 +132,9 @@ namespace IndeksatorTraining.UI
             return false;
         }
 
-        public void Add(T data)
+        public void Add(TKey key, TValue data)
         {
-            var element = new Element<T>(data);
+            var element = new Element<TKey, TValue>(key, data);
 
             if (head == null)
             {
@@ -158,13 +157,13 @@ namespace IndeksatorTraining.UI
             count = 0;
         }
 
-        public bool Contains(T data)
+        public bool Contains(TValue data)
         {
-            Element<T> current = head;
+            Element<TKey, TValue> current = head;
 
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if (current.Value.Equals(data))
                 {
                     return true;
                 }
@@ -180,13 +179,14 @@ namespace IndeksatorTraining.UI
             return ((IEnumerable)this).GetEnumerator();
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        IEnumerator<TKey> IEnumerable<TKey>.GetEnumerator()
         {
-            Element<T> current = head;
+            Element<TKey, TValue> current = head;
 
             while (current != null)
             {
-                yield return current.Data;
+                yield return current.Key;
+
                 current = current.Next;
             }
         }
