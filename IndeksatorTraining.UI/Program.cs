@@ -15,36 +15,34 @@ namespace IndeksatorTraining.UI
                 { "sergeyKey", "Sergey"}
             };
 
-            Console.WriteLine(elList["alexkey"]);
+            Console.WriteLine(elList["sergeyKey"]);
 
-            //Console.WriteLine(list["Frodo"]);
+            Display(elList);
 
-            //Console.WriteLine(new string('-', 20));
-            //Display(elList);
+            elList.Remove("Genadiy");
 
-            ////var el = elList["Alexandr"];
+            Hr();
+            Console.WriteLine("AfterRemove");
 
-            ////Console.WriteLine(el.Data);
+            Display(elList);
 
-            //elList.Remove("Genadi");
+            var element = new Element<string, string>("sonyaKey", "Sonya");
+            elList["sergeyKey"] = element;
 
-            //Console.WriteLine("After delete:");
+            Hr();
+            Console.WriteLine("After Insert element:");
 
-            //Display(elList);
-
-            //Console.WriteLine("Insert Element:");
-
-            //var element = new Element<string>("Пятница");
-
-            //elList["Ania"] = element;
-
-            //Display(elList);
+            Display(elList);
 
             Console.ReadKey();
         }
 
-        public static void Display<TKey, TValue>(ElementList<TKey, TValue> elements)
+        static void Hr() => Console.WriteLine(new string('-', 20));
+
+        static void Display<TKey, TValue>(ElementList<TKey, TValue> elements)
         {
+            Hr();
+
             Console.WriteLine($"Count Elements: {elements.Count}");
 
             foreach (var element in elements)

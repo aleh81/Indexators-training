@@ -27,22 +27,20 @@ namespace IndeksatorTraining.UI
             }
         }
 
-        private void InsertElement(Element<TKey, TValue> element, TKey data)
+        private void InsertElement(Element<TKey, TValue> element, TKey key)
         {
             Element<TKey, TValue> current = head;
             Element<TKey, TValue> previous = null;
             Element<TKey, TValue> tmp = null;
 
-            while(current != null)
+            while (current != null)
             {
-                if (current.Value.Equals(data))
+                if (current.Key.Equals(key))
                 {
-                    if(current.Next != null)
+                    if (current.Next != null)
                     {
                         tmp = current.Next;
-
                         current.Next = element;
-
                         element.Next = tmp;
                     }
                     else
@@ -60,32 +58,15 @@ namespace IndeksatorTraining.UI
 
         private Element<TKey, TValue> GetElementByData(TKey key)
         {
-            Element<TKey, TValue> current = head;
-            Element<TKey, TValue> previous = null;
+            var current = head;
 
             while (current != null)
             {
                 if (current.Key.Equals(key))
                 {
-
-                    if (previous != null && current.Next == null)
-                    {
-                        tail = previous;
-                    }
-                    else
-                    {
-                        head = head.Next;
-
-                        if (head == null)
-                        {
-                            tail = null;
-                        }
-                    }
-
                     return current;
                 }
 
-                previous = current;
                 current = current.Next;
             }
 
