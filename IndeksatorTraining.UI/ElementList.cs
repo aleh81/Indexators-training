@@ -31,7 +31,7 @@ namespace IndeksatorTraining.UI
         {
             Element<TKey, TValue> current = head;
             Element<TKey, TValue> previous = null;
-            Element<TKey, TValue> tmp = null;
+            Element<TKey, TValue> next = null;
 
             while (current != null)
             {
@@ -39,9 +39,9 @@ namespace IndeksatorTraining.UI
                 {
                     if (current.Next != null)
                     {
-                        tmp = current.Next;
+                        next = current.Next;
                         current.Next = element;
-                        element.Next = tmp;
+                        element.Next = next;
                     }
                     else
                     {

@@ -50,5 +50,10 @@ namespace IndeksatorTraining.UI
                 Console.WriteLine(element);
             }
         }
+
+        static void DisplayAlternative<Tkey, TValue>(ElementList<Tkey, TValue> elements)
+        {
+            Hr();
+        }
     }
 }
