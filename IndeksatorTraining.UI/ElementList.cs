@@ -49,6 +49,8 @@ namespace IndeksatorTraining.UI
                     {
                         current.Next = element;
                     }
+
+                    count++;
                 }
 
                 previous = current;

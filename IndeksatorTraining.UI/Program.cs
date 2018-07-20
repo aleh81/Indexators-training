@@ -39,6 +39,8 @@ namespace IndeksatorTraining.UI
 
         public static void Display<T>(ElementList<T> elements) where T : class
         {
+            Console.WriteLine($"Count Elements: {elements.Count}");
+
             foreach(var element in elements)
             {
                 Console.WriteLine(element);
