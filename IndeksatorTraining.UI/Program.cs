@@ -26,6 +26,14 @@ namespace IndeksatorTraining.UI
 
             Display(elList);
 
+            Console.WriteLine("Insert Element:");
+
+            var element = new Element<string>("Пятница");
+
+            elList["Ania"] = element;
+
+            Display(elList);
+
             Console.ReadKey();
         }
 

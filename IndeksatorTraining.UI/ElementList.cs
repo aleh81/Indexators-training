@@ -10,7 +10,7 @@ namespace IndeksatorTraining.UI
 
         Element<T> tail;
 
-        int count;
+        private int count;
 
         public int Count => count;
 
@@ -23,13 +23,37 @@ namespace IndeksatorTraining.UI
 
             set
             {
-                InsertElement(value);
+                InsertElement(value, index);
             }
         }
 
-        private void InsertElement(Element<T> element)
+        private void InsertElement(Element<T> element, T data)
         {
+            Element<T> current = head;
+            Element<T> previous = null;
+            Element<T> tmp = null;
 
+            while(current != null)
+            {
+                if (current.Data.Equals(data))
+                {
+                    if(current.Next != null)
+                    {
+                        tmp = current.Next;
+
+                        current.Next = element;
+
+                        element.Next = tmp;
+                    }
+                    else
+                    {
+                        current.Next = element;
+                    }
+                }
+
+                previous = current;
+                current = current.Next;
+            }
         }
 
         private Element<T> GetElementByData(T data)
@@ -74,34 +98,34 @@ namespace IndeksatorTraining.UI
 
             while (current != null)
             {
-                if (current.Data.Equals(data))
+                if (!current.Data.Equals(data))
                 {
-                    if (previous != null)
-                    {
-                        previous.Next = current.Next;
-
-                        if (current.Next == null)
-                        {
-                            tail = previous;
-                        }
-                    }
-                    else
-                    {
-                        head = head.Next;
-
-                        if (head == null)
-                        {
-                            tail = null;
-                        }
-                    }
-
-                    count--;
-
-                    return true;
+                    previous = current;
+                    current = current.Next;
                 }
 
-                previous = current;
-                current = current.Next;
+                if (previous != null)
+                {
+                    previous.Next = current.Next;
+
+                    if (current.Next == null)
+                    {
+                        tail = previous;
+                    }
+                }
+                else
+                {
+                    head = head.Next;
+
+                    if (head == null)
+                    {
+                        tail = null;
+                    }
+                }
+
+                count--;
+
+                return true;
             }
 
             return false;
@@ -130,6 +154,23 @@ namespace IndeksatorTraining.UI
             head = null;
             tail = null;
             count = 0;
+        }
+
+        public bool Contains(T data)
+        {
+            Element<T> current = head;
+
+            while (current != null)
+            {
+                if (current.Data.Equals(data))
+                {
+                    return true;
+                }
+
+                current = current.Next;
+            }
+
+            return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
