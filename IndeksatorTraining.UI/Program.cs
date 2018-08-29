@@ -75,7 +75,7 @@ namespace IndeksatorTraining.UI
         static void Display<TKey, TValue>(ElementList<TKey, TValue> elements)
         {
             Hr();
-
+            //
             Console.WriteLine($"Count Elements: {elements.Count}");
 
             foreach (var element in elements)

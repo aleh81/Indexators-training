@@ -143,7 +143,7 @@ namespace IndeksatorTraining.UI
             tail = null;
             count = 0;
         }
-
+        //
         public bool ContainsKey(TKey key)
         {
             var current = head;
